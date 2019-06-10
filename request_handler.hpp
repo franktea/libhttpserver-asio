@@ -38,7 +38,7 @@ public:
 
     // add handler with callable functions, example:
     // add_handler("/", [](){ return std::string("hello world"); };
-    void add_handler(std::string path, std::function<std::string()> handler);
+    void add_handler(std::string path, std::function<void(const request& req, reply& rep)> handler);
 
 private:
     /// The directory containing the files to be served.
@@ -48,7 +48,7 @@ private:
     /// invalid.
     static bool url_decode(const std::string& in, std::string& out);
 
-    std::map<std::string, std::function<std::string()>> dynamic_handlers_; // request with callbacks
+    std::map<std::string, std::function<void(const request& req, reply& rep)>> dynamic_handlers_; // request with callbacks
 };
 
 } // namespace server

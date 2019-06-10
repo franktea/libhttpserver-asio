@@ -87,7 +87,7 @@ void server::do_await_stop()
         });
 }
 
-void server::add_handler(std::string path, std::function<std::string()> handler)
+void server::add_handler(std::string path, std::function<void(const request& req, reply& rep)> handler)
 {
     request_handler_.add_handler(path, handler);
 }

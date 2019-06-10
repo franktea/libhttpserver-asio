@@ -230,3 +230,15 @@ reply reply::stock_reply(reply::status_type status)
 
 } // namespace server
 } // namespace http
+
+void http::server::reply::set_content(const std::string& content,
+        const std::string& mine_type)
+{
+    status = reply::ok;
+    headers.resize(2);
+    headers[0].name = "Content-Length";
+    headers[0].value = std::to_string(content.size());
+    headers[1].name = "Content-Type";
+    headers[1].value = mine_type;
+    this->content = content;
+}

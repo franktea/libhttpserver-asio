@@ -13,6 +13,9 @@
 #include <asio.hpp>
 #include "server.hpp"
 
+using http::server::request;
+using http::server::reply;
+
 int main(int argc, char* argv[])
 {
     try
@@ -31,9 +34,9 @@ int main(int argc, char* argv[])
         // Initialise the server.
         http::server::server s(argv[1], argv[2], argv[3]);
 
-        s.add_handler("/", []()->std::string
+        s.add_handler("/", [](const request& req, reply& rep)
         {
-            return "hello from http server.";
+            rep.set_content("hello from http server.", "text/plain");
         });
 
         // Run the server until stopped.

@@ -58,6 +58,8 @@ struct reply
 
     /// Get a stock reply.
     static reply stock_reply(status_type status);
+
+    void set_content(const std::string& content, const std::string& mine_type);
 };
 
 } // namespace server

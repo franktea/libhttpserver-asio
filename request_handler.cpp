@@ -47,15 +47,7 @@ void request_handler::handle_request(const request& req, reply& rep)
     auto it = dynamic_handlers_.find(request_path);
     if (it != dynamic_handlers_.end())
     {
-        std::string str = (it->second)();
-        // Fill out the reply to be sent to the client.
-        rep.status = reply::ok;
-        rep.headers.resize(2);
-        rep.headers[0].name = "Content-Length";
-        rep.headers[0].value = std::to_string(str.size());
-        rep.headers[1].name = "Content-Type";
-        rep.headers[1].value = "text/plain";
-        rep.content.assign(str);
+        (it->second)(req, rep);
         return;
     }
 
@@ -138,7 +130,7 @@ bool request_handler::url_decode(const std::string& in, std::string& out)
 } // namespace http
 
 void http::server::request_handler::add_handler(std::string path,
-        std::function<std::string()> handler)
+        std::function<void(const request& req, reply& rep)> handler)
 {
     dynamic_handlers_.insert(std::make_pair(path, handler));
 }

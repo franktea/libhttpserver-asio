@@ -34,7 +34,7 @@ public:
     explicit server(const std::string& address, const std::string& port,
             const std::string& doc_root);
 
-    void add_handler(std::string path, std::function<std::string()> handler);
+void add_handler(std::string path, std::function<void(const request& req, reply& rep)> handler);
 
     /// Run the server's io_context loop.
     void run();
