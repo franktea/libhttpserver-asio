@@ -1,13 +1,14 @@
 # libhttpserver-asio
 
 ```
-    // Initialise the server.
-    http::server::server s("127.0.0.1", 8000, ".");
+// Initialise the server.
+http::server::server s(argv[1], argv[2], argv[3]);
 
-    s.add_handler("/", []()->std::string {
-        return "hello from http server.";
-    });
+s.add_handler("/", [](const request& req, reply& rep)
+{
+    rep.set_content("hello from http server.", "text/plain");
+});
 
-    // Run the server until stopped.
-    s.run();
+// Run the server until stopped.
+s.run();
 ```
