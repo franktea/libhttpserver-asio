@@ -1,5 +1,7 @@
 # libhttpserver-asio
 
+A simple embedded http server lib modified from http server example source code of asio.
+
 ```
 // Initialise the server.
 http::server::server s("127.0.0.1", 8000, ".");
