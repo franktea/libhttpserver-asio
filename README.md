@@ -2,7 +2,7 @@
 
 ```
 // Initialise the server.
-http::server::server s(argv[1], argv[2], argv[3]);
+http::server::server s("127.0.0.1", 8000, ".");
 
 s.add_handler("/", [](const request& req, reply& rep)
 {
